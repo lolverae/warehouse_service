@@ -1,0 +1,6 @@
+fastapi==0.65.2
+# uvicorn[standard]
+uvicorn==0.14.0
+fastavro==1.3.4
+couchdb==1.2
+python-dotenv
