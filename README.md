@@ -17,29 +17,18 @@ Getting started
 
 - [Docker](https://www.docker.com/)
 - [Apache CouchDB](http://couchdb.apache.org)
-  ```sh
-  docker run --rm -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=pass -p 5984:5984 couchdb
-  ```
 
-### Installation
+### Using this project
 1. Clone the repo
-   ```sh
-   git clone https://github.com/andresr22/warehouse_service.git
- ```
-
-Build
------
-
-Inside the folder with all the files related to the project create a Dockerfile to describe the image of the Python app.
-
-To create the two services at the same time
-1. Create a docker-compose.yml file
+  ```sh
+   git clone https://github.com/lolverae/warehouse_service.git
+  ```
+2. 
+3. 
 
 
-
-
-Monitoring
-----------
+Included Scripts
+----------------
 To monitor the application create a script to check the HTTP status returned by the application, to do this we use the tool [curl](https://curl.se/docs/manual.html) in the script check_status.sh  
 To install curl in debian based systems use the following command
 
