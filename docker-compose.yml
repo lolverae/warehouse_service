@@ -3,6 +3,8 @@ version: '3.0'
 services:
   web:
     image: warehouse
+    depends_on:
+      - couch
     build:
       context: ./app
       #      args: 
@@ -15,6 +17,12 @@ services:
     networks:
       - warehouse-net
     command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     
 #    deploy:
 #      replicas: 2
@@ -32,6 +40,12 @@ services:
     restart: always
     networks:
       - warehouse-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5984"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 #    ports:
 #     - "5984:5984"
 #    deploy:

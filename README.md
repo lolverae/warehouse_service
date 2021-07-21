@@ -23,7 +23,12 @@ Getting started
   ```sh
   git clone https://github.com/lolverae/warehouse_service.git
   ```
-2. Create a enviroment file named *.env* inside the *app* containing the credentials for couchdb in this way:
+
+2. Run the convinience script and answer the prompts
+  ```sh
+  ./start.sh
+  ```
+Create a enviroment file named *.env* inside the *app* containing the credentials for couchdb in this way:
   ``` 
   COUCHDB_ADMIN = <your_username>
   COUCHDB_PASSWORD = <your_password>
@@ -36,6 +41,7 @@ Getting started
 
 Included Scripts
 ----------------
+
 To monitor the application create a script to check the HTTP status returned by the application, to do this we use the tool [curl](https://curl.se/docs/manual.html) in the script check_status.sh  
 To install curl in debian based systems use the following command
 
