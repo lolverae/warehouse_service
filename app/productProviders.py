@@ -6,7 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 ADMIN_USERNAME = os.environ.get("COUCHDB_USER")
 ADMIN_PASSWORD = os.environ.get("COUCHDB_PASSWORD")
-COUCHDB_URL = 'http://{}:{}@host.docker.internal:5984/'.format(ADMIN_USERNAME, ADMIN_PASSWORD)
+COUCHDB_HOST = os.environ.get("COUCH_HOST")
+COUCHDB_PORT = os.environ.get("COUCH_PORT")
+COUCHDB_URL = 'http://{}:{}@{}:{}/'.format(ADMIN_USERNAME, ADMIN_PASSWORD, COUCHDB_HOST,COUCHDB_PORT)
 
 couch = couchdb.Server(COUCHDB_URL)
 
