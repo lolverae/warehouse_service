@@ -82,3 +82,21 @@ To add a product you can use the FastAPI UI to make a request or make a direct r
 GET /products/get_product/{prodId}
 ```
 
+### Extra credits
+
+#### Check if microservice/database is running and start it if it isn't:
+For this you can run the docker compose file as a *stack*, for that we need to run the next command
+```sh
+docker stack deploy --compose-file docker-compose.yml warehouse
+```
+This makes use of the *deploy* part of the docker compose file, with the configuration we gave it, docker will create 2 replicas of each container and will restart any container that is stopped.
+
+
+#### Upload the used docker images to Docker Hub:
+You can find the docker image [here](https://hub.docker.com/repository/docker/lolverae/warehouse_service)
+
+
+#### Automate the build and deployment of your application using a bash/shell script:
+
+The great thing about docker is that the docker compose file already can do this for us!
+
