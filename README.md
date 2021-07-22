@@ -51,11 +51,11 @@ To install curl in debian based systems use the following command
    ```
 There are two scripts to check the health of the containers:
   ```sh
-  check_health.sh # Gets the HTTP status of both containers and lets you know if there is a problem with them
+  ./scripts/check_health.sh # Gets the HTTP status of both containers and lets you know if there is a problem with them
   ```
   
   ```sh
-  check-stats.sh # Takes a snapshot to the current resource usage statistics for the containers running
+  ./scripts/check-stats.sh # Takes a snapshot to the current resource usage statistics for the containers running
   ```
   
 
