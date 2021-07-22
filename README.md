@@ -28,15 +28,16 @@ Getting started
   ```sh
   ./start.sh
   ```
-Create a enviroment file named *.env* inside the *app* containing the credentials for couchdb in this way:
+The script will create a enviroment file named *.env* containing the credentials for couchdb and the port that is going to be used to check the app on localhost:
   ``` 
-  COUCHDB_ADMIN = <your_username>
-  COUCHDB_PASSWORD = <your_password>
+  COUCHDB_ADMIN=<your_username>
+  COUCHDB_PASSWORD=<your_password>
+  APP_PORT=<available_port>
   ```
-3. Run the following docker compose command
+<!-- 3. Run the following docker compose command
   ```sh
   docker compose up
-  ```
+  ``` -->
 
 
 Included Scripts
