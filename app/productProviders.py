@@ -9,7 +9,7 @@ ADMIN_PASSWORD = os.environ.get("COUCHDB_PASSWORD")
 #COUCHDB_HOST = os.environ.get("COUCH_HOST")
 #COUCHDB_PORT = os.environ.get("COUCH_PORT")
 COUCHDB_URL = 'http://{}:{}@couch:5984/'.format(ADMIN_USERNAME, ADMIN_PASSWORD)
-
+print(COUCHDB_URL)
 couch = couchdb.Server(COUCHDB_URL)
 
 class ProductProvider(object):
