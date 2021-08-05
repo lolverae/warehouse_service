@@ -2,16 +2,16 @@
 - hosts: ansible-server
   tasks:
   - name: create docker image using war file
-    command: docker build -t simple-devops-image:latest .
+    command: docker build -t warehouse_service:latest .
     args:
-      chdir: /opt/kubernetes
+      chdir: /home/alberto/warehouse_service/app
 
   - name: create tag to image
-    command: docker tag simple-devops-image lolverae/simple-devops-image
+    command: docker tag simple-devops-image lolverae/warehouse_service
 
   - name: push image on to dockerhub
-    command: docker push lolverae/simple-devops-image
+    command: docker push lolverae/warehouse_service
 
   - name: remove docker images form ansible server
-    command: docker rmi simple-devops-image:latest lolverae/simple-devops-image
+    command: docker rmi simple-devops-image:latest lolverae/warehouse_service
     ignore_errors: yes
