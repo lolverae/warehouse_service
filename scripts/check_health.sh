@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APP_PORT=$(grep APP_PORT .env | cut -d '=' -f2)
-docker inspect warehouse-service_couch_1 | grep -w healthy > /dev/null
+docker inspect warehouse_service_couch_1 | grep -w healthy > /dev/null
 if [ $? -eq 0 ]; then
     db_status=200
 fi

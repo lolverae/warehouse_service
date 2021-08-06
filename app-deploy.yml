@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: warehouse-app
+  labels:
+    app: warehouse-app
+spec:
+  ports:
+  - port: 8000
+  selector:
+    app: warehouse-app
+  type: NodePort
+
+---  
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: warehouse-app
+  labels:
+    app: warehouse-app
+spec:
+  selector:
+    matchLabels:
+      app: warehouse-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: warehouse-app
+
+    spec:
+      containers:
+      - image: lolverae/warehouse_service:latest
+        name: warehouse-app
+        ports:
+        - protocol: TCP
+          containerPort: 8000
+        volumeMounts:
+        - name: warehouse-app-storage
+          mountPath: /var/www/html
+        command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+      volumes:
+      - name: warehouse-app-storage
+        persistentVolumeClaim:
+          claimName: app-pv-claim
+
+

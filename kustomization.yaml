@@ -1,0 +1,3 @@
+resources:
+  - couchdb-deploy.yml
+  - app-deploy.yml
