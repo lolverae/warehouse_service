@@ -18,25 +18,15 @@ spec:
       containers:
       - image: lolverae/warehouse_service:latest
         name: warehouse-app
-        ports:
+        envFrom:
+        - secretRef:
+           name: db-user-pass
+        ports:       
         - protocol: TCP
           containerPort: 8000
         volumeMounts:
         - name: warehouse-app-storage
           mountPath: /var/www/html
-        env:
-        - name: SECRET_USERNAME
-        valueFrom:
-          secretKeyRef:
-            name: ADMIN_USERNAME
-            key: COUCHDB_USER
-        - name: SECRET_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: ADMIN_PASSWORD
-              key: COUCHDB_PASSWORD
         command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
       volumes:
       - name: warehouse-app-storage
-        persistentVolumeClaim:
-          claimName: app-pv-claim

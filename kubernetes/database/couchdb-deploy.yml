@@ -16,17 +16,9 @@ spec:
       containers:
       - name: couchdb
         image: couchdb:2.3
-        env:
-        - name: SECRET_USERNAME
-        valueFrom:
-          secretKeyRef:
-            name: ADMIN_USERNAME
-            key: COUCHDB_USER
-        - name: SECRET_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: ADMIN_PASSWORD
-              key: COUCHDB_PASSWORD
+        envFrom:
+        - secretRef:
+           name: db-user-pass
         ports:
         - containerPort: 5984
         volumeMounts:
