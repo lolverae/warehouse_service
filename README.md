@@ -27,21 +27,20 @@ Getting started
   git clone https://github.com/lolverae/warehouse_service.git
   ```
 
-2. Run the ansible playbook to build and push a docker image to DockerHub
+2. Run the ansible playbook inside the ansible folder, to build and push a docker image to DockerHub, indicating the name and version desired for the image
   ```sh
-  ansible-playbook -i create-docker-image.yml
+  cd warehouse_service/ansible
+  ansible-playbook -i -e "image_name=[image_name]" -e "image_version=[imagr_version]" main.yml
   ```
 3. Create a k8s secret with the variables used by the app
 ```sh
 kubectl create secret generic db-user-pass \
---from-literal=COUCHDB_USER=admin \
---from-literal=COUCHDB_PASSWORD=password123 \
---from-literal=COUCH_HOST=warehouse-db \
---from-literal=COUCH_PORT=5984
+--from-literal=username=admin \
+--from-literal=password=password123
 ```
 4. Go to the Kubernetes folder and deploy the cluster the apply command
 ```sh
-cd kubernetes/
+cd warehouse_service/kubernetes/
 kubectl apply -f api/,database/
 ```
 5. Run the command to get the port where k8s is redirecting traffic to access the service

@@ -18,9 +18,24 @@ spec:
       containers:
       - image: lolverae/warehouse_service:latest
         name: warehouse-app
-        envFrom:
-        - secretRef:
-           name: db-user-pass
+        env:
+        - name: COUCHDB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-user-pass
+              key: username
+        - name: COUCHDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-user-pass
+              key: password
+        - name: COUCH_HOST
+          value: "warehouse-db"
+        - name: COUCH_PORT
+          value: "5984"
+        # envFrom:
+        # - secretRef:
+        #    name: db-user-pass
         ports:       
         - protocol: TCP
           containerPort: 8000

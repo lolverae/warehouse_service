@@ -1,9 +1,9 @@
 import couchdb
 import os
 from couchdb import http
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 ADMIN_USERNAME = os.environ.get("COUCHDB_USER")
 ADMIN_PASSWORD = os.environ.get("COUCHDB_PASSWORD")
 COUCHDB_HOST = os.environ.get("COUCH_HOST")
