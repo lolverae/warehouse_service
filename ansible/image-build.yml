@@ -11,8 +11,6 @@
   run_once: true
   debug:
     msg: "Building image: {{ image_name }}"
-  when:
-  - build_and_push_debug == true and build_and_push_image_build == true
 
 - name: Build the Image {{image_name}}
   run_once: true
@@ -22,4 +20,4 @@
     tag: "{{ image_version }}"
     pull: true
   when:
-  - image_exists.stdout == "0" and build_and_push_image_build == true
+  - image_exists.stdout == "0"
