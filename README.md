@@ -31,11 +31,20 @@ Getting started
   ```sh
   ansible-playbook -i create-docker-image.yml
   ```
-3. Deploy the Kubernetes cluster using enviroment variables
+3. Create a k8s secret with the variables used by the app
 ```sh
-kubectl create secret generic db-user-pass --from-literal=COUCHDB_USER=admin --from-literal=COUCHDB_PASSWORD=password123 --from-literal=COUCH_HOST=warehouse-db --from-literal=COUCH_PORT=5984
+kubectl create secret generic db-user-pass \
+--from-literal=COUCHDB_USER=admin \
+--from-literal=COUCHDB_PASSWORD=password123 \
+--from-literal=COUCH_HOST=warehouse-db \
+--from-literal=COUCH_PORT=5984
 ```
-4. Run the command to get the port where k8s is redirecting traffic to access the service
+4. Go to the Kubernetes folder and deploy the cluster the apply command
+```sh
+cd kubernetes/
+kubectl apply -f api/,database/
+```
+5. Run the command to get the port where k8s is redirecting traffic to access the service
 ```sh
 kubectl get svc
 ```
