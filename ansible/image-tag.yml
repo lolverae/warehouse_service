@@ -2,23 +2,7 @@
 - name: Check if Image exists {{image_name}}
   run_once: true
   shell:
-    _raw_params: "docker image history {{ image_name }}:{{ image_version }} | wc -l"
-  delegate_to: localhost
-  register: tag_image_exists
-  changed_when: false
-
-- name: if image does still not exist, try to pull it {{ image_name }}
-  run_once:
-  shell:
-    _raw_params: "docker pull {{ image_name }}:{{ image_version }}"
-  delegate_to: localhost
-  when:
-  - (tag_image_exists.stdout == "0")
-
-- name: Check if Image exists {{image_name}}
-  run_once: true
-  shell:
-    _raw_params: "docker image history {{ image_name }}:{{ image_version }} | wc -l"
+    _raw_params: "sudo docker image history {{ image_name }}:{{ image_version }} | wc -l"
   delegate_to: localhost
   register: tag_image_exists
   changed_when: false
@@ -33,28 +17,21 @@
 - name: Tag with Version {{image_name}}
   run_once: true
   shell:
-    _raw_params: "docker tag {{ image_name }}:{{ image_version }} {{ image_name }}:{{ item }}"
+    _raw_params: "sudo docker tag {{ image_name }}:{{ image_version }} {{ image_name }}:{{ item }}"
   delegate_to: localhost
   with_items:
   - "{{ image_version.split('.')[0] }}.{{ image_version.split('.')[1] }}"
   - "{{ image_version.split('.')[0] }}"
   when:
-  - image_exists.stdout == "0" and image_version.split('.')|length > 1 and new_image_tag == false
+  - image_exists.stdout == "0" and image_version.split('.')|length > 1 
 
 - name: Tag latest {{image_name}}
   run_once: true
   shell:
-    _raw_params: "docker tag {{ image_name }}:{{ image_version }} {{ image_name }}:{{ item }}"
+    _raw_params: "sudo docker tag {{ image_name }}:{{ image_version }} {{ image_name }}:{{ item }}"
   delegate_to: localhost
   with_items:
   - "latest"
   when:
-  - image_exists.stdout == "0" and new_image_tag == false
+  - image_exists.stdout == "0"
 
-- name: Tag latest {{image_name}}
-  run_once: true
-  local_action:
-    module: shell
-    _raw_params: "docker tag {{image_name}}:{{image_version}} {{image_name}}:{{new_image_tag}}"
-  when:
-  - new_image_tag != false

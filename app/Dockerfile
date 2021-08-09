@@ -2,7 +2,7 @@ FROM python:3.7.11-slim-buster
 
 WORKDIR /opt
 
-COPY requirements.txt main.py productProviders.py .
+COPY . . 
 
 RUN pip install virtualenv \
   && virtualenv venv

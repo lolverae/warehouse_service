@@ -14,10 +14,8 @@
 
 - name: Build the Image {{image_name}}
   run_once: true
-  docker_image:
-    path: /home/alberto/warehouse_service/app
-    name: "{{ image_name }}"
-    tag: "{{ image_version }}"
-    pull: true
+  command: "sudo docker build -t {{ image_name }}:{{image_version}} ."
+  args:
+    chdir: /home/alberto/warehouse_service/app
   when:
   - image_exists.stdout == "0"

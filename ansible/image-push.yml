@@ -2,7 +2,7 @@
 - name: Push latest {{image_name}}
   run_once: true
   shell:
-    _raw_params: "docker push {{ image_name }}:latest"
+    _raw_params: "sudo docker push {{ image_name }}:latest"
   delegate_to: localhost
   when:
   - image_exists.stdout == "0"
@@ -10,7 +10,7 @@
 - name: Push version {{image_name}}
   run_once: true
   shell:
-    _raw_params: "docker push {{ image_name }}:{{ image_version }}"
+    _raw_params: "sudo docker push {{ image_name }}:{{ image_version }}"
   delegate_to: localhost
   when:
   - image_exists.stdout == "0"
@@ -18,7 +18,7 @@
 - name: Push versions {{image_name}}
   run_once: true
   shell:
-    _raw_params: "docker push {{ image_name }}:{{ item }}"
+    _raw_params: "sudo docker push {{ image_name }}:{{ item }}"
   delegate_to: localhost
   with_items:
   - "{{ image_version.split('.')[0] }}.{{ image_version.split('.')[1] }}"
