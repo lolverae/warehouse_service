@@ -1,7 +1,7 @@
 ---
 - hosts: ansible-server
   tasks:
-  - name: create docker image using war file
+  - name: create docker image
     command: docker build -t warehouse_service:latest .
     args:
       chdir: /home/alberto/warehouse_service/app
@@ -12,6 +12,6 @@
   - name: push image on to dockerhub
     command: docker push lolverae/warehouse_service
 
-  - name: remove docker images form ansible server
+  - name: remove docker images form current server
     command: docker rmi warehouse_service:latest lolverae/warehouse_service
     ignore_errors: yes

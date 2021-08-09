@@ -17,6 +17,9 @@ Getting started
 
 - [Docker](https://www.docker.com/)
 - [Apache CouchDB](http://couchdb.apache.org)
+- [Ansible](https://www.ansible.com/)
+- Kubernetes cluster
+- [DockerHub](https://hub.docker.com/) account
 
 ### Using this project
 1. Clone the repo
@@ -24,20 +27,19 @@ Getting started
   git clone https://github.com/lolverae/warehouse_service.git
   ```
 
-2. Run the convinience script and answer the prompts
+2. Run the ansible playbook to build and push a docker image to DockerHub
   ```sh
-  ./start.sh
+  ansible-playbook -i create-docker-image.yml
   ```
-The script will create a enviroment file named *.env* containing the credentials for couchdb and the port that is going to be used to check the app on localhost:
-  ``` 
-  COUCHDB_ADMIN=<your_username>
-  COUCHDB_PASSWORD=<your_password>
-  APP_PORT=<available_port>
-  ```
-<!-- 3. Run the following docker compose command
-  ```sh
-  docker compose up
-  ``` -->
+3. Deploy the Kubernetes cluster using enviroment variables
+```sh
+kubectl create secret generic db-user-pass --from-literal=COUCHDB_USER=admin --from-literal=COUCHDB_PASSWORD=password123 --from-literal=COUCH_HOST=warehouse-db --from-literal=COUCH_PORT=5984
+```
+4. Run the command to get the port where k8s is redirecting traffic to access the service
+```sh
+kubectl get svc
+```
+
 
 
 Included Scripts
