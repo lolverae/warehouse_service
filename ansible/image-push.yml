@@ -15,12 +15,3 @@
   when:
   - image_exists.stdout == "0"
 
-- name: Push versions {{image_name}}
-  run_once: true
-  shell:
-    _raw_params: "sudo docker push {{ image_name }}:{{ item }}"
-  delegate_to: localhost
-  with_items:
-  - "{{ image_version.split('.')[0] }}.{{ image_version.split('.')[1] }}"
-  - "{{ image_version.split('.')[0] }}"
-  when: image_exists.stdout == "0" and image_version.split('.')|length > 1
