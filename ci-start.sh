@@ -1,11 +1,4 @@
 #!/bin/bash
-# checar version
-# 1.0.1 
-# append commit id
-# create job, run to generate new docker tag, 
-# desde 1.0.0. ej,
-
-
 #echo "Enter a name for the docker image: "
 #read IMAGE_NAME
 
