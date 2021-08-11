@@ -14,3 +14,4 @@ echo COUCHDB_PASSWORD=$COUCHDB_PASSWORD_INPUT>>.env
 echo APP_PORT=$APP_PORT_INPUT>>.env
 
 $(docker-compose up -d)
+
