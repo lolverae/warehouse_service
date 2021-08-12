@@ -3,7 +3,7 @@ pipeline{
   stages{
 
     stage('Build') {
-      steps{sh 'sudo docker run lolverae/warehouse_service:latest'}
+      steps{sh 'docker run lolverae/warehouse_service:latest'}
     }
 
     stage('Test') {
@@ -11,6 +11,10 @@ pipeline{
     }
 
     stage('Package') {
-      steps {sh ''}}
+      steps {
+        withEnv(['ansible-playbook=/home/alberto/.local/bin/ansible-playbook']) {
+            sh '/home/alberto/warehouse_service/ci-start.sh'
+        }
+    }}
   }
 }

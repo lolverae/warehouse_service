@@ -14,7 +14,7 @@
 
 - name: Build the Image {{image_name}}
   run_once: true
-  command: "sudo docker build -t {{ image_name }}:{{image_version}} ."
+  command: "docker build -t {{ image_name }}:{{image_version}} ."
   args:
     chdir: /home/alberto/warehouse_service/app
   when:
