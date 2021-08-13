@@ -1,21 +1,23 @@
 ---
-- name: Check if Image exists {{image_name}}
-  run_once: true
-  shell:
-    _raw_params: "docker image history {{ image_name }}:{{ image_version }} | wc -l"
-  delegate_to: localhost
-  register: image_exists
-  changed_when: false
+- hosts: localhost
+  tasks:
+  - name: Check if Image exists {{image_name}}
+    run_once: true
+    shell:
+      _raw_params: "docker image history {{ image_name }}:{{ image_version }} | wc -l"
+    delegate_to: localhost
+    register: image_exists
+    changed_when: false
 
-- name: Print current image {{image_name}}
-  run_once: true
-  debug:
-    msg: "Building image: {{ image_name }}"
+  - name: Print current image {{image_name}}
+    run_once: true
+    debug:
+      msg: "Building image: {{ image_name }}"
 
-- name: Build the Image {{image_name}}
-  run_once: true
-  command: "docker build -t {{ image_name }}:{{image_version}} ."
-  args:
-    chdir: /var/lib/jenkins/workspace/warehouse-service/integration/app
-  when:
-  - image_exists.stdout == "0"
+  - name: Build the Image {{image_name}}
+    run_once: true
+    command: "docker build -t {{ image_name }}:{{image_version}} ."
+    args:
+      chdir: /var/lib/jenkins/workspace/warehouse-service/integration/app
+    when:
+    - image_exists.stdout == "0"
