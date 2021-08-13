@@ -14,16 +14,6 @@
   when:
   - tag_image_exists.stdout == "0"
 
-#- name: Tag with Version {{image_name}}
-#  run_once: true
-#  shell:
-#    _raw_params: "sudo docker tag {{ image_name }}:{{ image_version }} {{ image_name }}:{{ item }}"
-#  delegate_to: localhost
-#  with_items:
-#  - "{{ image_version.split('.')[0] }}.{{ image_version.split('.')[1] }}"
-#  when:
-#  - image_exists.stdout == "0" and image_version.split('.')|length > 1 
-
 - name: Tag latest {{image_name}}
   run_once: true
   shell:

@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   tasks:
-  - name: Build Image {{image_name}}
-    import_tasks: image-build.yml
+  # - name: Build Image {{image_name}}
+  #   import_tasks: image-build.yml
 
   - name: Tag Image {{image_name}}
     import_tasks: image-tag.yml
