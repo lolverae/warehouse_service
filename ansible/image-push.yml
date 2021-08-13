@@ -4,14 +4,12 @@
   shell:
     _raw_params: "docker push {{ image_name }}:latest"
   delegate_to: localhost
-  when:
-  - image_exists.stdout == "0"
+
 
 - name: Push version {{image_name}}
   run_once: true
   shell:
     _raw_params: "docker push {{ image_name }}:{{ image_version }}"
   delegate_to: localhost
-  when:
-  - image_exists.stdout == "0"
+
 

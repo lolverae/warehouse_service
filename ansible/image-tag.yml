@@ -22,5 +22,5 @@
   with_items:
   - "latest"
   when:
-  - image_exists.stdout == "0"
+  - tag_image_exists.stdout != "0"
 
