@@ -42,6 +42,5 @@ spec:
         volumeMounts:
         - name: warehouse-app-storage
           mountPath: /var/www/html
-        command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
       volumes:
       - name: warehouse-app-storage
