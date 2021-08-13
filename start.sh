@@ -1,9 +1,7 @@
 #!/bin/bash
-APP_PORT_INPUT=8000
-echo "Enter a username for the DB: "
-read COUCHDB_USER_INPUT
-echo "Enter a password for the DB: "
-read -s COUCHDB_PASSWORD_INPUT
+# APP_PORT_INPUT=8000
+COUCHDB_USER_INPUT=admin
+COUCHDB_PASSWORD_INPUT=pass123
 
 APP_PORT_INPUT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("",0)); print(s.getsockname()[1]); s.close()');
 
