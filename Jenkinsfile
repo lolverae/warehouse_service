@@ -4,7 +4,6 @@
 // 4. Push image -> push docker image, using image tag and image build 
 // 5. clean up
 
-
 pipeline{
   agent {label 'ansible-agent'}
   stages{
@@ -19,28 +18,28 @@ pipeline{
 	}
     stage ('Package') {
       steps {
-        sh 'pwd'
         sh './package.sh'
       }
     }
     stage('Component Test') {
       steps {
         sh './start.sh'
+        sleep 10
         sh './scripts/check_health.sh'
       }
     }
 
     stage('Pushing Image') {
       steps {
-        withEnv(['ansible-playbook=/home/alberto/.local/bin/ansible-playbook']) 
-          {sh './tag-push.sh'}
+          sh './tag-push.sh'
       }
     }
     stage('Clean Up') {
       steps {
         sh 'docker stop $(docker ps -q)'
         sh 'docker rm $(docker ps -a -q)'
-        sh 'docker rmi $(docker images -q)'
+        sh 'echo y | docker system prune -a'
+        sh 'echo y | docker volume prune'
       }
     }
   }
