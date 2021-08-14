@@ -23,6 +23,8 @@ pipeline{
     }
     stage('Component Test') {
       steps {
+        sh 'docker stop $(docker ps -q)'
+        sh 'docker rm $(docker ps -a -q)'
         sh './start.sh'
         sleep 10
         sh './scripts/check_health.sh'
