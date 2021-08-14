@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: warehouse-db
+  namespace: warehouse-ns
 spec:
   selector:
     matchLabels:
@@ -31,9 +32,6 @@ spec:
           value: "warehouse-db"
         - name: COUCH_PORT
           value: "5984"
-        # envFrom:
-        # - secretRef:
-        #    name: db-user-pass
         ports:
         - containerPort: 5984
         volumeMounts:
