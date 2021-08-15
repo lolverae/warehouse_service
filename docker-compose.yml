@@ -10,7 +10,7 @@ services:
       #      args: 
       # port:${APP_PORT} 
     ports: 
-      - "9090:8000"
+      - "${APP_PORT}:8000"
     env_file:
       - .env
     restart: always
