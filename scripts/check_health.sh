@@ -9,7 +9,7 @@ fi
 
 #$(docker inspect warehouse-service_couch_1 | grep -w healthy)&&db_status=300
 api_status=`echo $(curl --write-out %{http_code} --silent --connect-timeout 3 \
-                  --no-keepalive --output /dev/null http://localhost:$APP_PORT)`
+                  --no-keepalive --output /dev/null http://localhost:9090)`
 
 #__________ get the STATUS (from code) which is human interpretable:
 if [ "$api_status" -ne "200" ] && [ "$db_status" -ne "200" ];then

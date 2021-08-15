@@ -13,18 +13,18 @@ pipeline{
       sh 'virtualenv -p /usr/bin/python3 venv'
       sh 'source venv/bin/activate'
       sh 'sudo pip3 install -r ./app/requirements.txt'    
-    //   sh 'cd ./app && uvicorn main:app --host 0.0.0.0 --port 8000'
+      sh 'cd ./app && nohup uvicorn main:app --host 0.0.0.0 --port 9090 & ./scripts/test.sh'
     }
 	}
     stage ('Package') {
       steps {
+        sh 'docker stop $(docker ps -q)'
+        sh 'docker rm $(docker ps -a -q)'
         sh './package.sh'
       }
     }
     stage('Component Test') {
       steps {
-        sh 'docker stop $(docker ps -q)'
-        sh 'docker rm $(docker ps -a -q)'
         sh './start.sh'
         sleep 10
         sh './scripts/check_health.sh'
