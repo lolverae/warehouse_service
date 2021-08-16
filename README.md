@@ -20,6 +20,10 @@ Getting started
 - [Ansible](https://www.ansible.com/)
 - Kubernetes cluster
 - [DockerHub](https://hub.docker.com/) account
+- [Jenkins](https://www.jenkins.io/?src=sidebar) agent
+
+### CI/CD
+This project is suited for a jenkins pipeline, all you have to do is setting up your Jenkins agent whatever way you like and create a declarative [pipeline](https://www.jenkins.io/doc/pipeline/tour/hello-world/#:~:text=Jenkins%20Pipeline%20(or%20simply%20%22Pipeline,continuous%20delivery%20pipelines%20into%20Jenkins.&text=The%20definition%20of%20a%20Jenkins,a%20project's%20source%20control%20repository.) job and build from the Jenkinsfile in this repository.
 
 ### Using this project
 1. Clone the repo
