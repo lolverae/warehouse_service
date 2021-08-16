@@ -4,6 +4,8 @@ api_status=`echo $(curl --write-out %{http_code} --silent --connect-timeout 3 \
 
 if [ "$api_status" -ne 200 ]; then
   echo "ERROR"
+  export FIRST_TEST="false"
 else
   echo "Everything seems ok :)"
+  export FIRST_TEST="true"
 fi
