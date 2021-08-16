@@ -18,10 +18,10 @@ pipeline{
         echo $FIRST_TEST
         '''
         script {
-            if (!'{$FIRST_TEST}') {
+            if ('!$FIRST_TEST') {
                 echo 'BUILD FAILED, CHECK THE APP ❌❌ ╰（‵□′）╯'
                 currentBuild.result = 'FAILURE'
-                exit 1
+                sh 'exit 1'
             }
         }
 	  }
@@ -37,10 +37,10 @@ pipeline{
         sleep 10
         sh './scripts/check_health.sh'
         script {
-            if (!'{$SECOND_TEST}') {
+            if ('!$SECOND_TEST') {
                 echo 'COMPONENT TEST FAILED ❌ ╰（‵□′）╯'
                 currentBuild.result = 'FAILURE'
-                exit 1
+                sh 'exit 1'
             }
         }        
       }
