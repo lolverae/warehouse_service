@@ -18,7 +18,7 @@ pipeline{
         echo $FIRST_TEST
         '''
         script {
-            if ('!$FIRST_TEST') {
+            if ('!{$FIRST_TEST}') {
                 echo 'BUILD FAILED, CHECK THE APP ❌❌ ╰（‵□′）╯'
                 currentBuild.result = 'FAILURE'
                 sh 'exit 1'
@@ -45,7 +45,7 @@ pipeline{
         }        
       }
     }
-    
+
 
     stage('Pushing Image') {
       steps {
