@@ -10,19 +10,24 @@ pipeline{
 	stage('Build'){
 	  steps{
         git branch: 'master', url: 'https://github.com/lolverae/warehouse_service.git'
-        sh 'virtualenv -p /usr/bin/python3 venv'
-        sh 'source venv/bin/activate'
-        sh 'sudo pip3 install -r ./app/requirements.txt'    
-        sh 'cd ./app && nohup uvicorn main:app --host 0.0.0.0 --port 9090 & sleep 5 &&source ./scripts/test.sh'
-        sh '''#!/bin/bash
-        echo $FIRST_TEST
-        '''
         script {
-            if ('!{$FIRST_TEST}') {
+            sh '''#!/bin/bash
+            virtualenv -p /usr/bin/python3 venv
+            source venv/bin/activate
+            sudo pip3 install -r ./app/requirements.txt
+            cd ./app && nohup uvicorn main:app --host 0.0.0.0 --port 9090 & sleep 5 &&source ./scripts/test.sh
+            echo $FIRST_TEST
+            if [ $FIRST_TEST == false ]; then
                 echo 'BUILD FAILED, CHECK THE APP ❌❌ ╰（‵□′）╯'
-                currentBuild.result = 'FAILURE'
-                sh 'exit 1'
-            }
+                exit 1
+            fi
+            '''
+            // sh 'printenv'
+            // if ('!{$FIRST_TEST}') {
+            //     echo 'BUILD FAILED, CHECK THE APP ❌❌ ╰（‵□′）╯'
+            //     currentBuild.result = 'FAILURE'
+            //     sh 'exit 1'
+            // }
         }
 	  }
 	}
@@ -33,15 +38,18 @@ pipeline{
     }
     stage('Component Test') {
       steps {
-        sh './start.sh'
-        sleep 10
-        sh './scripts/check_health.sh'
+
         script {
-            if ('!$SECOND_TEST') {
-                echo 'COMPONENT TEST FAILED ❌ ╰（‵□′）╯'
-                currentBuild.result = 'FAILURE'
-                sh 'exit 1'
-            }
+
+          sh '''#!/bin/bash
+            ./start.sh
+            sleep 10
+            ./scripts/check_health.sh
+            if [ $SECOND_TEST == false ]; then
+                echo 'BUILD FAILED, COMPONENT TEST FAILED❌❌ ╰（‵□′）╯'
+                exit 1
+            fi
+          '''
         }        
       }
     }
@@ -54,10 +62,12 @@ pipeline{
     }
     stage('Clean Up') {
       steps {
-        sh 'docker stop $(docker ps -q)'
-        sh 'docker rm $(docker ps -a -q)'
-        sh 'echo y | docker system prune -a'
-        sh 'echo y | docker volume prune'
+        sh '''#!/bin/bash
+        docker stop $(docker ps -q)
+        docker rm $(docker ps -a -q)
+        echo y | docker system prune -a
+        echo y | docker volume prune
+        '''
       }
     }
   }
