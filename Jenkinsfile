@@ -19,8 +19,9 @@ pipeline{
         '''
         script {
             if (!'{$FIRST_TEST}') {
-                echo 'angy ╰（‵□′）╯'
+                echo 'BUILD FAILED, CHECK THE APP ❌❌ ╰（‵□′）╯'
                 currentBuild.result = 'FAILURE'
+                exit 1
             }
         }
 	  }
@@ -37,8 +38,9 @@ pipeline{
         sh './scripts/check_health.sh'
         script {
             if (!'{$SECOND_TEST}') {
-                echo 'angy ╰（‵□′）╯'
+                echo 'COMPONENT TEST FAILED ❌ ╰（‵□′）╯'
                 currentBuild.result = 'FAILURE'
+                exit 1
             }
         }        
       }
@@ -64,7 +66,7 @@ pipeline{
       deleteDir() /* clean up our workspace */
     }
     success {
-      echo 'I succeeded!'
+      echo 'I succeeded! ✔✔'
     }
     unstable {
       echo 'I am unstable :/'

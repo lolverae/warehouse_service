@@ -12,13 +12,13 @@ api_status=`echo $(curl --write-out %{http_code} --silent --connect-timeout 3 \
                   --no-keepalive --output /dev/null http://localhost:$APP_PORT)`
 
 #__________ get the STATUS (from code) which is human interpretable:
-if [ "$api_status" -ne "200" ] && [ "$db_status" -ne "200" ];then
+if [ "$api_status" != "200" ] && [ "$db_status" != "200" ];then
   echo "Both containers have errors"
   export SECOND_TEST="false"
-elif [ "$api_status" -ne 200 ];then
+elif [ "$api_status" != "200" ];then
   echo "ERROR: The micro service container is having problems"
   export SECOND_TEST="false"
-elif [ "$db_status" -ne 200 ];then 
+elif [ "$db_status" != "200" ];then 
   echo "ERROR: The database container is having problems" 
   export SECOND_TEST="false"
 else
