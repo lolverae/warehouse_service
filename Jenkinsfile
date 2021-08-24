@@ -3,9 +3,6 @@
 // 3. component test -> docker compose up and running check-health script
 // 4. Push image -> push docker image, using image tag and image build 
 // 5. clean up
-// some stuff should be done with ansible but whatevs works for now lol
-
-// TODO 
 pipeline{
   agent {label 'build-agent'}
   stages{
