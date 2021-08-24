@@ -3,7 +3,9 @@
 // 3. component test -> docker compose up and running check-health script
 // 4. Push image -> push docker image, using image tag and image build 
 // 5. clean up
+// some stuff should be done with ansible but whatevs works for now lol
 
+// TODO 
 pipeline{
   agent {label 'build-agent'}
   stages{
@@ -12,7 +14,8 @@ pipeline{
         git branch: 'master', url: 'https://github.com/lolverae/warehouse_service.git'
         script {
             sh '''#!/bin/bash
-            virtualenv -p /usr/bin/python3 venv
+            
+            sudo python3 -m venv venv
             source venv/bin/activate
             sudo pip3 install -r ./app/requirements.txt
             cd ./app && nohup uvicorn main:app --host 0.0.0.0 --port 9090 & sleep 5 &&source ./scripts/test.sh
@@ -22,12 +25,6 @@ pipeline{
                 exit 1
             fi
             '''
-            // sh 'printenv'
-            // if ('!{$FIRST_TEST}') {
-            //     echo 'BUILD FAILED, CHECK THE APP ❌❌ ╰（‵□′）╯'
-            //     currentBuild.result = 'FAILURE'
-            //     sh 'exit 1'
-            // }
         }
 	  }
 	}
@@ -71,20 +68,19 @@ pipeline{
       }
     }
   }
-  post {
-    always {
-      echo 'One way or another, I have finished'
-      deleteDir() /* clean up our workspace */
-    }
-    success {
-      echo 'I succeeded! ✔✔'
-    }
-    unstable {
-      echo 'I am unstable :/'
-    }
-    failure {
-      echo 'I failed :('
-    }
-  }
+  // post {
+  //   always {
+  //     echo 'One way or another, I have finished'
+  //     deleteDir() /* clean up our workspace */
+  //   }
+  //   success {
+  //     echo 'I succeeded! ✔✔'
+  //   }
+  //   unstable {
+  //     echo 'I am unstable :/'
+  //   }
+  //   failure {
+  //     echo 'I failed :('
+  //   }
+  // }
 }
-
