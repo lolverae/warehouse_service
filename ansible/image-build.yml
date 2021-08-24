@@ -16,7 +16,7 @@
 
   - name: debug
     run_once: true
-    command: whoami
+    command: echo $USER
 
   - name: Build the Image {{image_name}}
     run_once: true
