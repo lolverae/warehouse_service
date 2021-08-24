@@ -5,7 +5,7 @@
 // 5. clean up
 
 pipeline{
-  agent {label 'ansible-agent'}
+  agent {label 'build-agent'}
   stages{
 	stage('Build'){
 	  steps{
