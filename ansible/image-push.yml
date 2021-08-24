@@ -11,5 +11,3 @@
   shell:
     _raw_params: "sudo docker push {{ image_name }}:{{ image_version }}"
   delegate_to: localhost
-
-
