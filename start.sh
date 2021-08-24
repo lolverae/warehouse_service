@@ -12,4 +12,4 @@ echo COUCHDB_PASSWORD=$COUCHDB_PASSWORD_INPUT>>.env
 echo APP_PORT=$APP_PORT_INPUT>>.env
 sleep 5
 docker images -a
-docker-compose up -d
+/usr/local/bin/docker-compose up -d
