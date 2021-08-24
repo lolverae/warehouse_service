@@ -18,6 +18,6 @@
     run_once: true
     command: "docker build -t {{ image_name }}:{{image_version}} ."
     args:
-      chdir: ./app
+      chdir: /home/ansadmin/jenkins/workspace/warehouse-service/integration/app
     when:
     - image_exists.stdout == "0"
