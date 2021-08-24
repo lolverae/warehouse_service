@@ -3,8 +3,7 @@
   tasks:
   - name: Check if Image exists {{image_name}}
     run_once: true
-    shell:
-      _raw_params: "docker image history {{ image_name }}:{{ image_version }} | wc -l"
+    command: "docker image history {{ image_name }}:{{ image_version }} | wc -l"
     delegate_to: localhost
     register: image_exists
     changed_when: false

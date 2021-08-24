@@ -1,13 +1,11 @@
 ---
 - name: Push latest {{image_name}}
   run_once: true
-  shell:
-    _raw_params: "docker push {{ image_name }}:latest"
+  command: "docker push {{ image_name }}:latest"
   delegate_to: localhost
 
 
 - name: Push version {{image_name}}
   run_once: true
-  shell:
-    _raw_params: "sudo docker push {{ image_name }}:{{ image_version }}"
+  command: "sudo docker push {{ image_name }}:{{ image_version }}"
   delegate_to: localhost
