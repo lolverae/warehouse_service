@@ -10,5 +10,6 @@ printf "Access the app on http://localhost:9091"
 echo COUCHDB_USER=$COUCHDB_USER_INPUT>.env
 echo COUCHDB_PASSWORD=$COUCHDB_PASSWORD_INPUT>>.env
 echo APP_PORT=$APP_PORT_INPUT>>.env
-
-$(docker-compose up -d)
+sleep 5
+docker images -a
+docker-compose up -d
