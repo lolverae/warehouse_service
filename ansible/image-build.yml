@@ -14,9 +14,13 @@
     debug:
       msg: "Building image: {{ image_name }}"
 
+  - name: debug
+    run_once: true
+    command: whoami
+
   - name: Build the Image {{image_name}}
     run_once: true
-    command: "whoami; docker build -t {{ image_name }}:{{image_version}} ."
+    command: "docker build -t {{ image_name }}:{{image_version}} ."
     args:
       chdir: /home/ansadmin/jenkins/workspace/warehouse-service/integration/app
     when:
