@@ -15,7 +15,7 @@ class Product(BaseModel):
 
 @app.get("/")
 def root():
-    return {"Welcome": "🍕"}
+    return {"Bonjour": "🍕"}
 
 @app.get("/read_product/{prodId}")
 def read_product(prodId: str):
