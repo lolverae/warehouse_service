@@ -17,6 +17,6 @@
     run_once: true
     shell: "docker build -t {{ image_name }}:{{image_version}} ."
     args:
-      chdir: ./app
+      chdir: ../app
     when:
     - image_exists.stdout == "0"
