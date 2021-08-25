@@ -15,7 +15,7 @@
 
   - name: Build the Image {{image_name}}
     run_once: true
-    command: "docker build -t {{ image_name }}:{{image_version}} ."
+    shell: "docker build -t {{ image_name }}:{{image_version}} ."
     args:
       chdir: ./app
     when:
