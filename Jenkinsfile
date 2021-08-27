@@ -5,6 +5,12 @@
 // 5. clean up
 pipeline{
   agent {label 'build-agent'}
+  environment{
+    CC = """${sh(
+        returnStdout: true,
+        script: 'echo "clang"'
+    )}""" 
+  }
   stages{
 	stage('Build'){
 	  steps{
