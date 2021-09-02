@@ -1,7 +1,9 @@
 #!/bin/bash
 
 APP_PORT=$(grep APP_PORT .env | cut -d '=' -f2)
-docker inspect integration_couch_1 | grep -w healthy > /dev/null
+DB_IMAGE=$(echo "$(basename "`pwd`")""_couch_1")
+docker inspect $DB_IMAGE| grep -w healthy > /dev/null
+
 if [ $? -eq 0 ]; then
     db_status=200
 fi
